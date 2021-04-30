@@ -13,7 +13,7 @@
 
 service: auth-server
 # app and org for use with dashboard.serverless.com
-#app: your-app-name
+# app: Meet App
 #org: your-org-name
 
 # You can pin your service to only deploy with a specific Serverless version
@@ -30,7 +30,7 @@ provider:
     CLIENT_SECRET: ${file(config.json):CLIENT_SECRET}
     PROJECT_ID: ${file(config.json):PROJECT_ID}
     CALENDAR_ID: ${file(config.json):CALENDAR_ID}
-  # lambdaHashingVersion: 20201221
+    lambdaHashingVersion: 20201221
 
 # you can overwrite defaults here
 #  stage: dev
@@ -67,12 +67,21 @@ provider:
 functions:
   getAuthURL:
     handler: handler.getAuthURL
-    #    The following are a few example events you can configure
-    #    NOTE: Please make sure to change your handler code to work with those events
-    #    Check the event documentation for details
     events:
       - http:
           path: api/get-auth-url
+          method: get
+  getAccessToken:
+    handler: handler.getAccessToken
+    events:
+      - http:
+          path: api/token/{code}
+          method: get
+  getCalendarEvents:
+    handler: handler.getCalendarEvents
+    events:
+      - http:
+          path: api/get-events/{access_token}
           method: get
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
