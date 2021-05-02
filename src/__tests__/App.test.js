@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import App from '../App';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
-import NumberOfEvents from '../NumberOfEvents';
+import NumberOfEvents from '../NbrOfEvents';
 
 
 describe('<App /> component', () => {

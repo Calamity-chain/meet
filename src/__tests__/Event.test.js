@@ -10,11 +10,11 @@ describe('<Event /> component', () => {
         EventWrapper = shallow(<Event event={event} />);
     });
 
-    // beforeEach(() => {
-    //     EventWrapper.setState({
-    //         showDetails: false
-    //     });
-    // });
+    beforeEach(() => {
+        EventWrapper.setState({
+            showDetails: false
+        });
+    });
   
     test('render correct event details', () => {
       expect(EventWrapper.find('.event-container')).toHaveLength(1);

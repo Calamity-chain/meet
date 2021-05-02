@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
-import NumberOfEvents from './NumberOfEvents';
+import NumberOfEvents from './NbrOfEvents';
 
 function App() {
   return (
