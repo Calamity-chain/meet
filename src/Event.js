@@ -21,7 +21,7 @@ class Event extends Component {
         <p>{event.start.dateTime}</p>
         <p className='locations'>{event.location}</p>
 
-        {this.state.showHideDetails && (
+        {this.state.showDetails && (
           <div className='event-details'>
             <h2>About event:</h2>
             <a href={event.htmlLink}>See Details</a>
