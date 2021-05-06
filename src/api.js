@@ -10,10 +10,28 @@ import axios from 'axios';
 import NProgress from 'nprogress';
 import { mockData } from './mock-data';
 
+
+export const extractLocations = (events) => {
+  var extractLocations = events.map((event) => event.location);
+  var locations = [...new Set(extractLocations)];
+  return locations;
+};
+
+const checkToken = async (accessToken) => {
+  const result = await fetch(
+    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+  )
+  .then((res) => res.json())
+  .catch((error) => error.json());
+
+  return result;
+};
+
+
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
   const { access_token } = await fetch(
-    'https://6064eh7xrh.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
+    'https://6064eh7xrh.execute-api.eu-central-1.amazonaws.com/dev/api/token/' + encodeCode
   )
     .then((res) => {
       return res.json();
@@ -42,23 +60,7 @@ const getToken = async (code) => {
      return code && getToken(code);
    }
    return accessToken;
- }
-
- export const extractLocations = (events) => {
-  var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
-};
-
-const checkToken = async (accessToken) => {
-  const result = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
-  )
-  .then((res) => res.json())
-  .catch((error) => error.json());
-
-  return result;
-};
+ };
 
 const removeQuery = () => {
   if (window.history.pushState && window.location.pathname) {
@@ -84,7 +86,7 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url = 'https://6064eh7xrh.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
+    const url = 'https://6064eh7xrh.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/' + token;
     const result = await axios.get(url);
     if (result.data) {
       var locations = extractLocations(result.data.events);
