@@ -10,13 +10,13 @@ class NumberOfEvents extends Component {
     this.setState({
       eventValue,
     });
+    this.props.updateEvents(null, eventValue);
   };
 
   render() {
     return (
       <div className='event-number'>
-        <label htmlFor='numberOfEvent'></label>
-        <p>Number of Events:</p>
+        <label htmlFor='numberOfEvent'>Number of Events:</label>
         <input
           type='number'
           name='numberOfEvent'

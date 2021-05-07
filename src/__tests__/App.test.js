@@ -64,4 +64,23 @@ describe('<App /> integration', () => {
     expect(AppWrapper.state('events')).toEqual(allEvents);
     AppWrapper.unmount();
   });
+  test('App passes "eventValue" state as a prop to NumberOfEvents', () => {
+    const AppWrapper = mount(<App />);
+    const AppNumberState = AppWrapper.state('eventValue');
+    expect(AppNumberState).not.toEqual(undefined);
+    expect(AppWrapper.find(NumberOfEvents).props().eventValue).toEqual(AppNumberState);
+    AppWrapper.unmount();
+  });
+  test('change number of events displayed according to user input', () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    AppWrapper.instance().updateEvents = jest.fn();
+    AppWrapper.instance().forceUpdate();
+    NumberOfEventsWrapper.setState({ eventValue : 32 });
+    const eventObject = { target: { value: 1 } };
+    NumberOfEventsWrapper.find('.event-number-input').simulate('change', eventObject);
+    expect(NumberOfEventsWrapper.state('eventValue')).toBe(1);
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(null, 1);
+    AppWrapper.unmount();
+  })
 });
