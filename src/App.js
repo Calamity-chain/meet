@@ -4,34 +4,49 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NbrOfEvents';
-import { getEvents,extractLocations } from './api';
+import { getEvents, extractLocations } from './api';
 
 
 class App extends Component {
   state = {
     events: [],
     locations: [],
-    eventValue: 32
+    eventValue: 32,
+    selectedCity: 'all'
   }
 
-  updateEvents = (location, eventValue ) => {
-    getEvents().then((events) => {
-      const eventCount = eventValue || this.state.eventValue;
-      const locationEvents = (location === 'all') ? events: events.filter((event) => event.location === location);
-      this.setState({
-        events: locationEvents,
-        eventValue : eventCount
-      });
-    });
-  }
+  updateEvents = (location, eventCount ) => {
+    const { selectedCity, eventValue } = this.state;
+		if (location) {
+			getEvents().then((events) => {
+				const locationEvents =
+				location === 'all' ? events : events.filter((event) => event.location === location);
+				const filteredEvents = locationEvents.slice(0, eventValue);
+				this.setState({
+					events: filteredEvents,
+					selectedCity: location,
+				});
+			});
+		} else {
+			getEvents().then((events) => {
+				const locationEvents =
+				selectedCity === 'all'? events : events.filter((event) => event.location === selectedCity);
+				const filteredEvents = locationEvents.slice(0, eventCount);
+				this.setState({
+					events: filteredEvents,
+					eventValue: eventCount,
+				});
+			});
+		}
+	};
 
   componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
       this.setState({ 
-        events: events.slice(0, this.state.eventValue), 
-        locations : extractLocations(events),
+        events, 
+        locations : extractLocations(events)
       });
       }
     });
@@ -52,14 +67,5 @@ class App extends Component {
   }
 }
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <CitySearch/>
-//       <NumberOfEvents />
-//       <EventList events={[]}/>
-//     </div>
-//   );
-// }
 
 export default App;
