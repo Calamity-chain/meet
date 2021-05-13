@@ -19,11 +19,11 @@ class CitySearch extends Component {
         query: value,
         infoText: 'We can not find  the city you are looking for. Please try another city',
       }); 
-    }else if (!value) {
-      this.setState({
-        query: value,
-        warningText: 'YOu have not selected any city yet'
-      });
+    // }else if (!value) {
+    //   this.setState({
+    //     query: value,
+    //     warningText: 'YOu have not selected any city yet'
+    //   });
     }else{
       return this.setState({
         query: value,
