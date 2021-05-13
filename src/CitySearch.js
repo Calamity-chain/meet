@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { InfoAlert } from './Alert';
+import { InfoAlert, WarningAlert } from './Alert';
 
 class CitySearch extends Component {
   state = {
@@ -18,7 +18,11 @@ class CitySearch extends Component {
       this.setState({
         query: value,
         infoText: 'We can not find  the city you are looking for. Please try another city',
-      });     
+      }); 
+    }else if (!value) {
+      this.setState({
+        warningText: 'YOu have not selected a city yet'
+      });
     }else{
       return this.setState({
         query: value,
@@ -40,7 +44,8 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="CitySearch">
-        <InfoAlert text = {this.state.infoText} />
+        <InfoAlert text = {this.state.infoText}/>
+        <WarningAlert text = {this.state.warningText}/>
         <input 
         type="text"
         placeholder='Enter a city...'
