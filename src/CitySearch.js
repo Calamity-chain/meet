@@ -21,7 +21,8 @@ class CitySearch extends Component {
       }); 
     }else if (!value) {
       this.setState({
-        warningText: 'YOu have not selected a city yet'
+        query: value,
+        warningText: 'YOu have not selected any city yet'
       });
     }else{
       return this.setState({
