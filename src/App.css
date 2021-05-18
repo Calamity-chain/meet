@@ -46,7 +46,7 @@ input[type="number"] {
   flex-basis: 300px;
   max-width: 300px;
   margin: auto;
-  position: fixed;
+  position: relative;
   margin-bottom: 50px;
   padding-top: 20px;
 }
@@ -60,6 +60,7 @@ input[type="number"] {
   top: 43px;
   font-size: 14px;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
+  padding-top: 20px;
 }
 
 .suggestions > li {
@@ -144,7 +145,7 @@ input[type="number"] {
 
 .Alert {
   position: fixed;
-  top: 20px;
+  top: 5px;
 }
 
 .data-vis-wrapper {
