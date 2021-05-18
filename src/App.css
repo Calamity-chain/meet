@@ -46,8 +46,9 @@ input[type="number"] {
   flex-basis: 300px;
   max-width: 300px;
   margin: auto;
-  position: relative;
+  position: fixed;
   margin-bottom: 50px;
+  padding-top: 20px;
 }
 
 .suggestions {
