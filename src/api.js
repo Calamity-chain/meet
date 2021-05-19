@@ -73,7 +73,7 @@ const removeQuery = () => {
   }
 };
 
-export const getEvents = async () => {
+export const getEvents = async (events) => {
   NProgress.start();
 
   //returns mock data on local host
@@ -83,13 +83,10 @@ export const getEvents = async () => {
   }
 
    //returns previously cached events  
-  if (!navigator.onLine) {
-    const events = localStorage.getItem("lastEvents");
+   if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
     NProgress.done();
-    return {
-      events: JSON.parse(events).events,
-      locations: extractLocations(JSON.parse(events).events),
-    };
+    return data?JSON.parse(events).events:[];;
   }
   
 
