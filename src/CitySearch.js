@@ -36,7 +36,8 @@ class CitySearch extends Component {
     this.setState({
       query: suggestion,
       showSuggestions: false,
-      infoText:''
+      infoText:'',
+      warningText:''
     });
   
     this.props.updateEvents(suggestion);
