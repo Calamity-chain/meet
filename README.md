@@ -3,6 +3,9 @@ an app to find local events to meet up at
 Serverless, progressive web application (PWA) with React using a test-driven development (TDD) technique. <br>
 The application uses the Google Calendar API to fetch upcoming event
 
+![image](https://user-images.githubusercontent.com/78163718/119177479-aa389000-ba6c-11eb-8cb1-e6cec2a42713.png)
+
+
 <h1> Features </h1>
 
 <li> Filter events by city.
