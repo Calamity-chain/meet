@@ -4,6 +4,7 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NbrOfEvents';
+import EventGenre from './EventGenre';
 import { getEvents, extractLocations } from './api';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -74,7 +75,14 @@ class App extends Component {
       <h4>Choose your nearest city</h4>
       <CitySearch locations={locations} updateEvents={this.updateEvents} />
       <NumberOfEvents eventValue={eventValue} updateEvents={this.updateEvents}/>
-      <h4>Events in each city</h4>
+      
+      <div className="data-vis-wrapper">
+      <h4 className="chart-label">Frequency of Event by Type:</h4>
+      <EventGenre 
+            events={events}
+            locations={locations}
+      />
+      <h4 className="chart-label">Events in each city</h4>  
       <ResponsiveContainer height={400} >
           <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <CartesianGrid />
@@ -89,6 +97,7 @@ class App extends Component {
             <Scatter data={this.getData()} fill="#8884d8" />
           </ScatterChart>
         </ResponsiveContainer>
+      </div>
       <EventList events={events}/>
     </div>
   );
